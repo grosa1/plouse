@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-navbar color="dark">
+    <ion-title>
+      Consumi
+    </ion-title>
+    <ion-buttons right>
+      <button ion-button clear (click)="startScanning()">Scan Device</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="back" padding>
+
+  <ion-list>
+
+
+    <h5 *ngIf="gettingDevices">
+      Searching For Devices
+      <ion-spinner name="crescent" *ngIf="gettingDevices"></ion-spinner>
+    </h5>
+
+
+    <ion-item class="back" *ngFor='let device of unpairedDevices'>
+    <span (click)="selectDevice(device.address)">
+      {{device.name}}
+    </span>
+    </ion-item>
+
+  </ion-list>
+  <button ion-button  outline block color="dark"(click)="data()">Start Receiving Data</button>
+  <ion-item class="back"  >
+    <p class="fon">
+      {{message}}
+    </p>
+
+  </ion-item>
+  <ion-item>
+    <button ion-button (click)="send(A_ON)">A ON</button>
+    <button ion-button (click)="send(A_OFF)">a OFF</button>
+  </ion-item>
+  <ion-item>
+    <button ion-button (click)="send(B_ON)">B ON</button>
+    <button ion-button (click)="send(B_OFF)">b OFF</button>
+  </ion-item>
+
+  <ion-fab left bottom>
+    <button ion-fab color="primary" (click)="page()"><ion-icon name="list"></ion-icon></button>
+  </ion-fab>
+  <ion-fab right bottom>
+    <button ion-fab color="danger" (click)="disconnect()"><ion-icon name="close-circle"></ion-icon></button>
+  </ion-fab>
+</ion-content>
