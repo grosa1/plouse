@@ -45,6 +45,7 @@
   "description": "An Ionic project",
   "cordova": {
     "plugins": {
+      "cordova-plugin-bluetooth-serial": {},
       "cordova-plugin-whitelist": {},
       "cordova-plugin-statusbar": {},
       "cordova-plugin-device": {},
