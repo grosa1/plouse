@@ -1,5 +1,5 @@
 import { Component, NgZone } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, AlertController } from 'ionic-angular';
 import { BluetoothSerial } from '@ionic-native/bluetooth-serial';
 /**
  * Generated class for the ConsumiPage page.
@@ -129,9 +129,17 @@ export class ConsumiPage {
 
   read() {
     this.bluetoothSerial.read().then((data) => {
-      this.message = data;
-      console.log("DATA: " + data);
-    })
+      if (data) {
+        this.message = data;
+        console.log(data);
+      }
+      // let dataJson = JSON.parse(data);
+      // let data1 = dataJson["corrente"];
+      // let data2 = dataJson["potenza"];
+      // console.log("data");
+      // console.log(data1);
+      // console.log(data2);
+    });
 
   }
 
