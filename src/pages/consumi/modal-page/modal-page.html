@@ -6,33 +6,34 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>ModalPage</ion-title>
+  <ion-navbar padding-right>
+    <ion-title>Connessione</ion-title>
     <ion-buttons end>
-      <button ion-button (click)="closeModal()">Close</button>
-      <button ion-button clear (click)="startScanning()">Scan Device</button>
+      <button ion-button color="dark" (click)="startScanning()">Cerca</button>
+      <button ion-button color="dark" (click)="closeModal()">
+        <ion-icon name="close-circle"></ion-icon>
+      </button>
     </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
-
-<ion-content class="back" padding>
-
+<ion-content padding>
   <ion-list>
+    <ion-item no-lines>
+      <h2>STATO: {{isConnected == true ? 'Connesso' : 'Non connesso'}}</h2>
+    </ion-item>
 
-
-    <h5 *ngIf="gettingDevices">
-      Searching For Devices
+    <h5>Dispositivi:</h5>
+    <p *ngIf="gettingDevices">
+      Ricerca dispositivi
       <ion-spinner name="crescent" *ngIf="gettingDevices"></ion-spinner>
-    </h5>
-
+    </p>
 
     <ion-item class="back" *ngFor='let device of unpairedDevices'>
-    <span (click)="selectDevice(device.address)">
+      <span (click)="selectDevice(device.address)">
       {{device.name}}
     </span>
     </ion-item>
-
   </ion-list>
 </ion-content>

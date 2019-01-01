@@ -18,6 +18,7 @@ export class ModalPage {
   unpairedDevices: any;
   pairedDevices: any;
   gettingDevices: Boolean;
+  isConnected = false;
 
   constructor(private navParams: NavParams,
               private view: ViewController,
@@ -25,13 +26,9 @@ export class ModalPage {
               private alertCtrl: AlertController) {
   }
 
-  ionViewWillLoad() {
-    const data = this.navParams.get('data');
-    console.log(data);
-  }
-
   ngOnInit() {
-    //this.startScanning()
+    const data = this.navParams.get('data');
+    this.isConnected = data['state'];
   }
 
   startScanning() {
@@ -57,24 +54,29 @@ export class ModalPage {
       })
   }
 
-  success = (data) => alert(data);
+  success = (data) => {
+    alert(data);
+    this.isConnected = true;
+    this.closeModal();
+  };
+
   fail = (error) => alert(error);
 
   selectDevice(address: any) {
 
     let alert = this.alertCtrl.create({
-      title: 'Connect',
-      message: 'Do you want to connect with?',
+      title: 'Nuova connessione',
+      message: 'Connettersi al dispositivo?',
       buttons: [
         {
-          text: 'Cancel',
+          text: 'Annulla',
           role: 'cancel',
           handler: () => {
             console.log('Cancel clicked');
           }
         },
         {
-          text: 'Connect',
+          text: 'Connetti',
           handler: () => {
             this.bluetoothSerial.connect(address).subscribe(this.success, this.fail);
 
@@ -90,7 +92,7 @@ export class ModalPage {
 
   closeModal() {
     const data = {
-      res: 'ok',
+      state: this.isConnected,
       btserial: this.bluetoothSerial
     };
     this.view.dismiss(data);

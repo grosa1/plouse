@@ -1,53 +1,54 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar padding-right>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>
       Consumi
     </ion-title>
-    <ion-buttons right>
-      <button ion-button clear (click)="startScanning()">Scan Device</button>
+    <ion-buttons end>
+      <button ion-button color="dark" (click)="openModal()">
+        <ion-icon name="bluetooth"></ion-icon>
+      </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content class="back" padding>
 
-  <ion-list>
+  <ion-item no-lines>
+    <h1 style="font-size: 50px">
+      Corrente: {{corrente}}
+    </h1>
+    <h1>
+      Potenza: {{potenza}}
+    </h1>
+  </ion-item>
 
-
-    <h5 *ngIf="gettingDevices">
-      Searching For Devices
-      <ion-spinner name="crescent" *ngIf="gettingDevices"></ion-spinner>
-    </h5>
-
-
-    <ion-item class="back" *ngFor='let device of unpairedDevices'>
-    <span (click)="selectDevice(device.address)">
-      {{device.name}}
-    </span>
+  <h4>Dispositivi collegati:</h4>
+  <ion-list *ngIf="isConnected">
+    <ion-item>
+      <h2>Dispositivo #1</h2>
+        <button item-right ion-button (click)="btn_a()">{{btnTextA}}</button>
     </ion-item>
-
+    <ion-item>
+      <h2>Dispositivo #2</h2>
+      <button item-right ion-button (click)="btn_b()">{{btnTextB}}</button>
+    </ion-item>
   </ion-list>
-  <button ion-button  outline block color="dark"(click)="data()">Start Receiving Data</button>
-  <ion-item class="back"  >
-    <p class="fon">
-      {{message}}
-    </p>
-
-  </ion-item>
-  <ion-item>
-    <button ion-button (click)="send(A_ON)">A ON</button>
-    <button ion-button (click)="send(A_OFF)">a OFF</button>
-  </ion-item>
-  <ion-item>
-    <button ion-button (click)="send(B_ON)">B ON</button>
-    <button ion-button (click)="send(B_OFF)">b OFF</button>
-  </ion-item>
-  <button ion-button (click)="openModal()">Open Modal</button>
-
-  <ion-fab bottom>
-    <button ion-fab color="danger" (click)="disconnect()"><ion-icon name="close-circle"></ion-icon></button>
-  </ion-fab>
+  <button ion-button (click)="data()">ricevi</button>
 </ion-content>
+
+
+
+<ion-footer>
+  <ion-item style="background: #F8F8F8" text-center="">
+    <div *ngIf="isConnected;then connected else not_connected"></div>
+    <ng-template #connected>
+      STATO: <strong>Connesso</strong>
+    </ng-template>
+    <ng-template #not_connected>
+      STATO: <strong>Non connesso</strong>
+    </ng-template>
+  </ion-item>
+</ion-footer>
