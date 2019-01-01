@@ -1,5 +1,5 @@
 import { Component, NgZone } from '@angular/core';
-import { IonicPage, NavController, AlertController } from 'ionic-angular';
+import {IonicPage, NavController, AlertController, ModalController, ModalOptions, Modal} from 'ionic-angular';
 import { BluetoothSerial } from '@ionic-native/bluetooth-serial';
 /**
  * Generated class for the ConsumiPage page.
@@ -14,12 +14,9 @@ import { BluetoothSerial } from '@ionic-native/bluetooth-serial';
   templateUrl: 'consumi.html',
 })
 export class ConsumiPage {
-  output: any;
   message: String;
-  responseTxt: any;
   unpairedDevices: any;
   pairedDevices: any;
-  statusMessage: string;
   gettingDevices: Boolean;
   A_ON = "A";
   A_OFF = "a";
@@ -29,7 +26,8 @@ export class ConsumiPage {
   constructor(private bluetoothSerial: BluetoothSerial,
               private alertCtrl: AlertController,
               public navCtrl: NavController,
-              private ngZone: NgZone) {
+              private ngZone: NgZone,
+              private modal: ModalController) {
 
     bluetoothSerial.enable();
   }
@@ -93,34 +91,6 @@ export class ConsumiPage {
   }
 
 
-  disconnect() {
-    let alert = this.alertCtrl.create({
-      title: 'Disconnect?',
-      message: 'Do you want to Disconnect?',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-            alert.dismiss();
-          }
-        },
-        {
-          text: 'Disconnect',
-          handler: () => {
-            this.bluetoothSerial.disconnect();
-            this.gettingDevices = null;
-          }
-        }
-      ]
-    });
-    alert.present();
-  }
-
-  next() {
-    this.navCtrl.push('TerminalPage');
-  }
-
   data() {
     setInterval(() => {
       this.read1();
@@ -154,4 +124,32 @@ export class ConsumiPage {
       console.log(value + ", " + res);
     });
   }
+
+  openModal() {
+
+    const myModalOptions: ModalOptions = {
+      enableBackdropDismiss: false
+    };
+
+    const myModalData = {
+      name: 'Paul Halliday',
+      occupation: 'Developer'
+    };
+
+    const myModal: Modal = this.modal.create('ModalPage', { data: myModalData }, myModalOptions);
+
+    myModal.present();
+
+    myModal.onDidDismiss((data) => {
+      console.log("I have dismissed.");
+      console.log(data);
+      this.bluetoothSerial = data['btserial'];
+    });
+
+    myModal.onWillDismiss((data) => {
+
+    });
+
+  }
+
 }
