@@ -35,7 +35,7 @@ export class ConsumiPage {
   }
 
   ngOnInit() {
-    this.startScanning()
+    //this.startScanning()
   }
 
   startScanning() {
