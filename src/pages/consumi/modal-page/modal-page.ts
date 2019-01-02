@@ -55,12 +55,12 @@ export class ModalPage {
   }
 
   success = (data) => {
-    alert(data);
+    this.presentAlert("Connessione effettuata!");
     this.isConnected = true;
     this.closeModal();
   };
 
-  fail = (error) => alert(error);
+  fail = (error) => this.presentAlert("Errore di connessione");
 
   selectDevice(address: any) {
 
@@ -96,5 +96,13 @@ export class ModalPage {
       btserial: this.bluetoothSerial
     };
     this.view.dismiss(data);
+  }
+
+  presentAlert(msg) {
+    let alert = this.alertCtrl.create({
+      subTitle: msg,
+      buttons: ['Ok']
+    });
+    alert.present();
   }
 }

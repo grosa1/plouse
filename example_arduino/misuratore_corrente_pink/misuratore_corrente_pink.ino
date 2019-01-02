@@ -135,6 +135,6 @@ void loop() {
   //Serial.print(costi);
   //Serial.print(" cent/h F0   ");
   */
-  delay(5000);
+  delay(2000);
     
 }
