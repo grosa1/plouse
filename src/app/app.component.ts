@@ -32,7 +32,7 @@ export class MyApp {
       { title: 'Segnalazioni', component: SegnalazioniPage },
       { title: 'Spese', component: CostiPage },
       { title: 'Statistiche', component: StatistichePage },
-      { title: 'Consumi', component: ConsumiPage },
+      { title: 'Domotica', component: ConsumiPage },
     ];
 
   }
