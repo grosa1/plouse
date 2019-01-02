@@ -1,5 +1,5 @@
 import {Component, NgZone, ViewChild} from '@angular/core';
-import {IonicPage, NavController, AlertController, ModalController, ModalOptions, Modal} from 'ionic-angular';
+import {IonicPage, NavController, ModalController, ModalOptions, Modal} from 'ionic-angular';
 import {BluetoothSerial} from '@ionic-native/bluetooth-serial';
 import {BaseChartDirective} from "ng2-charts";
 
@@ -27,9 +27,9 @@ export class ConsumiPage {
   btColorB = "danger";
 
   corrente = 0;
-  correnteMin = 0;
-  correnteMed = 0;
-  correnteMax = 0;
+  consumoMin = 0;
+  consumoMed = 0;
+  consumoMax = 0;
   potenza = 0;
 
   //###########CHART SETUP
@@ -64,7 +64,6 @@ export class ConsumiPage {
   public lineChartType:string = 'line';
 
   constructor(private bluetoothSerial: BluetoothSerial,
-              private alertCtrl: AlertController,
               public navCtrl: NavController,
               private ngZone: NgZone,
               private modal: ModalController) {
@@ -82,22 +81,22 @@ export class ConsumiPage {
     this.bluetoothSerial.read().then((data) => {
       if (data) {
         let dataJson = JSON.parse(data);
-        this.potenza = dataJson["potenza"];
         this.corrente = dataJson["corrente"];
+        this.potenza = dataJson["potenza"];
 
-        this.updateChart(this.corrente);
+        this.updateChart(this.potenza);
 
-        if(this.corrente != 0) {
-          if ((this.correnteMin == 0) || (this.corrente < this.correnteMin)) {
-            this.correnteMin = this.correnteMax;
+        if(this.potenza != 0) {
+          if ((this.consumoMin == 0) || (this.corrente < this.consumoMin)) {
+            this.consumoMin = this.consumoMax;
           }
 
-          if (this.corrente > this.correnteMax) {
-            this.correnteMax = this.corrente;
+          if (this.potenza > this.consumoMax) {
+            this.consumoMax = this.potenza;
           }
 
-          let mean = (this.correnteMed + this.corrente) / 2;
-          this.correnteMed = parseFloat(mean.toFixed(2));
+          let mean = (this.consumoMed + this.potenza) / 2;
+          this.consumoMed = parseFloat(mean.toFixed(2));
         }
         // console.table(data);
       }
