@@ -1,16 +1,12 @@
-//Arduino Misuratore di potenza e corrente elettrica con SCT-013-030
-
-//Per il corretto funzionamento installare la libreria EmonLib
-
 #include "EmonLib.h"
 #include "ArduinoJson.h"
-#include <Wire.h>     // Libreria wire giÃƒ  presente in Arduino ide 
+#include <Wire.h>  // Libreria wire già  presente in Arduino ide 
 //#include <SoftwareSerial.h> // includo la libreria per la comunicazione seriale
 
 //SoftwareSerial mySerial(10, 11); // imposto i pin per la comunicazione seriale     
 
-#define RELAY_ON 1 //0
-#define RELAY_OFF 0 //1
+#define RELAY_ON 0 //0
+#define RELAY_OFF 1 //1
 
 #define Relay_1  2  // Arduino Digital I/O pin number
 #define Relay_2  3
@@ -94,23 +90,21 @@ void loop() {
     potenza=0;
   }
   if(stato1==1){
-    corrente=0.04;
-    potenza=10;
+    potenza=random(8,10);
+    corrente=(potenza/rete);
   }
   if(stato2==1){
-    corrente=0.08;
-    potenza=20;
+    potenza=random(5,7);
+    corrente=(potenza/rete);
   }
   if(stato1==1 && stato2==1){
-    corrente=0.12;
-    potenza=30;
+    potenza=random(13,16);
+    corrente=(potenza/rete);
   }
-
+  
   //PRINT DATA AS JSON
   DynamicJsonBuffer jsonBuffer(bufferSize);
   JsonObject& root = jsonBuffer.createObject();
-  root["r1"] = stato1;
-  root["r2"] = stato2;
   root["corrente"] = corrente;
   root["potenza"] = potenza;
 
@@ -122,7 +116,6 @@ void loop() {
   Serial.print(Irms); // Irms
   //mySerial.print(Irms);
   Serial.print("A");
-
   //Calcola e mostra i valori della Potenza
   Serial.print(" Potenza : ");
   Serial.print(Irms * rete); //Scrivo sul monitor seriale Corrente*Tensione=Potenza
