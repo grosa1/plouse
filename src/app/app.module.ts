@@ -6,11 +6,11 @@ import { ChartsModule } from 'ng2-charts';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { ConsumiPage } from '../pages/consumi/consumi'
+import { DomoticaPage } from '../pages/domotica/domotica'
 import { RubricaPage } from '../pages/rubrica/rubrica'
 import { SegnalazioniPage } from '../pages/segnalazioni/segnalazioni'
-import {CostiPage} from "../pages/costi/costi";
-import {StatistichePage} from "../pages/statistiche/statistiche";
+import {SpesePage} from "../pages/spese/spese";
+import {ConsumiPage} from "../pages/consumi/consumi";
 import {AvvisiPage} from "../pages/avvisi/avvisi";
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -20,11 +20,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   declarations: [
     MyApp,
     HomePage,
-    ConsumiPage,
+    DomoticaPage,
     RubricaPage,
     SegnalazioniPage,
-    CostiPage,
-    StatistichePage,
+    SpesePage,
+    ConsumiPage,
     AvvisiPage
   ],
   imports: [
@@ -36,11 +36,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   entryComponents: [
     MyApp,
     HomePage,
-    ConsumiPage,
+    DomoticaPage,
     RubricaPage,
     SegnalazioniPage,
-    CostiPage,
-    StatistichePage,
+    SpesePage,
+    ConsumiPage,
     AvvisiPage
   ],
   providers: [

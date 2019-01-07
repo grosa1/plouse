@@ -4,11 +4,11 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
-import {ConsumiPage} from "../pages/consumi/consumi";
+import {DomoticaPage} from "../pages/domotica/domotica";
 import {RubricaPage} from "../pages/rubrica/rubrica";
 import {SegnalazioniPage} from "../pages/segnalazioni/segnalazioni";
-import {CostiPage} from "../pages/costi/costi";
-import {StatistichePage} from "../pages/statistiche/statistiche";
+import {SpesePage} from "../pages/spese/spese";
+import {ConsumiPage} from "../pages/consumi/consumi";
 import {AvvisiPage} from "../pages/avvisi/avvisi";
 
 @Component({
@@ -30,9 +30,9 @@ export class MyApp {
       { title: 'Avvisi', component: AvvisiPage },
       { title: 'Rubrica', component: RubricaPage },
       { title: 'Segnalazioni', component: SegnalazioniPage },
-      { title: 'Spese', component: CostiPage },
-      { title: 'Statistiche', component: StatistichePage },
-      { title: 'Domotica', component: ConsumiPage },
+      { title: 'Spese', component: SpesePage },
+      { title: 'Consumi', component: ConsumiPage },
+      { title: 'Domotica', component: DomoticaPage },
     ];
 
   }

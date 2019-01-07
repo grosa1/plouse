@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController } from 'ionic-angular';
 
 /**
- * Generated class for the CostiPage page.
+ * Generated class for the SpesePage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -11,9 +11,9 @@ import { IonicPage, NavController } from 'ionic-angular';
 @IonicPage()
 @Component({
   selector: 'page-costi',
-  templateUrl: 'costi.html',
+  templateUrl: 'spese.html',
 })
-export class CostiPage {
+export class SpesePage {
 
   // Doughnut
   public doughnutChartLabels:string[] = ['Acqua', 'Luce', 'Gas'];

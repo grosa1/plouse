@@ -1,93 +1,36 @@
+<!--
+  Generated template for the ConsumiPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
 <ion-header>
-  <ion-navbar padding-right>
+
+  <ion-navbar>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>
-      Domotica
-    </ion-title>
-    <ion-buttons end>
-      <button ion-button color="dark" (click)="openModal()">
-        <ion-icon name="bluetooth"></ion-icon>
-      </button>
-    </ion-buttons>
+    <ion-title>Consumi</ion-title>
   </ion-navbar>
+
 </ion-header>
 
-<ion-content class="back" padding>
 
-  <ion-item *ngIf="!isConnected" no-lines text-wrap text-center justify-content-center align-items-center
-            style="height: 100%">
-    <p>Nessun dispositivo connesso.</p>
-  </ion-item>
-
-  <div *ngIf="isConnected">
-    <div style="display: block;">
-      <canvas baseChart width="300" height="300"
-              [datasets]="lineChartData"
-              [labels]="lineChartLabels"
-              [options]="lineChartOptions"
-              [colors]="lineChartColors"
-              [legend]="lineChartLegend"
-              [chartType]="lineChartType"></canvas>
-    </div>
-
-    <ion-list>
-      <ion-item no-lines>
-        <h5>
-          Consumo (W): {{potenza}}
-        </h5>
-      </ion-item>
-      <ion-item>
-        <ion-row align-items-center>
-          <ion-col>
-            <p>
-              min: {{consumoMin}}
-            </p>
-          </ion-col>
-          <ion-col>
-            <p>
-              med: {{consumoMed}}
-            </p>
-          </ion-col>
-          <ion-col>
-            <p>
-              max: {{consumoMax}}
-            </p>
-          </ion-col>
-        </ion-row>
-      </ion-item>
-      <ion-item no-lines>
-        <h5>
-          Intensità (A): {{corrente}}
-        </h5>
-      </ion-item>
-    </ion-list>
-
-    <h4>Dispositivi collegati:</h4>
-    <ion-list>
-      <ion-item>
-        <h2>Dispositivo #1</h2>
-        <button item-right ion-button round [color]="btColorA" (click)="btn_a()">{{btnTextA}}</button>
-      </ion-item>
-      <ion-item>
-        <h2>Dispositivo #2</h2>
-        <button item-right ion-button round [color]="btColorB" (click)="btn_b()">{{btnTextB}}</button>
-      </ion-item>
-    </ion-list>
+<ion-content padding>
+  <div style="display: block;">
+    <canvas baseChart width="300" height="400"
+            [datasets]="lineChartData"
+            [labels]="lineChartLabels"
+            [options]="lineChartOptions"
+            [colors]="lineChartColors"
+            [legend]="lineChartLegend"
+            [chartType]="lineChartType"
+            (chartHover)="chartHovered($event)"
+            (chartClick)="chartClicked($event)"></canvas>
   </div>
 
-</ion-content>
-
-
-<ion-footer>
-  <ion-item style="background: #F8F8F8" text-center="">
-    <div *ngIf="isConnected;then connected else not_connected"></div>
-    <ng-template #connected>
-      STATO: <strong>Connesso</strong>
-    </ng-template>
-    <ng-template #not_connected>
-      STATO: <strong>Non connesso</strong>
-    </ng-template>
+  <ion-item>
+    <button ion-button item-left>Dettagli</button>
+    <button ion-button item-right>Storico</button>
   </ion-item>
-</ion-footer>
+</ion-content>

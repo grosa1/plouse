@@ -1,5 +1,5 @@
 #include "EmonLib.h"
-//#include "ArduinoJson.h"
+#include "ArduinoJson.h"
 #include <Wire.h>  // Libreria wire già  presente in Arduino ide 
 //#include <SoftwareSerial.h> // includo la libreria per la comunicazione seriale
 
@@ -23,7 +23,7 @@ int stato1 = 0;
 int stato2 = 0;
 float corrente = 0;
 int potenza = 0;
-//const size_t bufferSize = JSON_OBJECT_SIZE(4);
+const size_t bufferSize = JSON_OBJECT_SIZE(4);
 
 
 //############ SETUP ############
@@ -91,31 +91,24 @@ void loop() {
   }
   if(stato1==1){
     potenza=random(8,10);
-    corrente=(potenza/rete);
+    corrente=0.03;
   }
   if(stato2==1){
     potenza=random(5,7);
-    corrente=(potenza/rete);
+    corrente=0.02;
   }
   if(stato1==1 && stato2==1){
     potenza=random(13,16);
-    corrente=(potenza/rete);
+    corrente=0.06;
   }
   
   //PRINT DATA AS JSON
+  DynamicJsonBuffer jsonBuffer(bufferSize);
+  JsonObject& root = jsonBuffer.createObject();
+  root["corrente"] = corrente;
+  root["potenza"] = potenza;
 
-  Serial.print("{\"corrente\":");
-  Serial.print(corrente);
-  Serial.print(",\"potenza\":");
-  Serial.print(potenza);
-  Serial.println("}")
-
-  // DynamicJsonBuffer jsonBuffer(bufferSize);
-  // JsonObject& root = jsonBuffer.createObject();
-  // root["corrente"] = corrente;
-  // root["potenza"] = potenza_stub;
-
-  // root.printTo(Serial);
+  root.printTo(Serial);
   
   /*
   //if (Irms < 0.15) Irms = 0; //tolgo il consumo a zero dovuto all'alimentatore di ARduino
